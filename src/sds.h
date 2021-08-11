@@ -147,12 +147,14 @@ struct __attribute__ ((__packed__)) sdshdr64 {
 #define SDS_TYPE_5_LEN(f) ((f)>>SDS_TYPE_BITS)
 
 // 注意到这是一个静态函数：
-// static functions are functions that are only visible to other functions in
-// the same file
+// In C, a static function is not visible outside of its translation unit,
+// which is the object file it is compiled into. In other words, making a
+// function static limits its scope. You can think of a static
+// function as being "private" to its *.c file
+// 
 // 另，这是一个内联(inline)函数,
 // 主要用于将函数做原地展开从而实现减少函数栈的开销的作用，
 // 一般情况下主要用于一些较为短小的函数。
-// 
 // inline: The intent of the inline specifier is to serve as a hint for the
 // compiler to perform optimizations, such as function inlining, which usually
 // require the definition of a function to be visible at the call site. The
